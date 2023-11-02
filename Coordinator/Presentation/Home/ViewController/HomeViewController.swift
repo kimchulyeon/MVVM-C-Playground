@@ -12,7 +12,7 @@ import RxCocoa
 class HomeViewController: UIViewController {
     //MARK: - properties
     let viewModel: HomeViewModel!
-    var coordinator: Coordinator!
+    var coordinator: HomeCoordinator!
     
     var disposeBag = DisposeBag()
     
@@ -32,8 +32,9 @@ class HomeViewController: UIViewController {
         setLayout()
         
         nextButton.rx.tap
-            .subscribe { _ in
-                print("hello world")
+            .subscribe { [weak self] _ in
+                guard let weakSelf = self else { return }
+                weakSelf.coordinator.moveToNext()
             }
             .disposed(by: disposeBag)
             

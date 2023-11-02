@@ -23,7 +23,9 @@ class HomeCoordinator: Coordinator {
     }
     
     func moveToNext() {
-        
+        let nextCoordinator = NextCoordinator(navigationController: self.navigationController)
+        childCoordinators.append(nextCoordinator)
+        nextCoordinator.start()
     }
     
     
