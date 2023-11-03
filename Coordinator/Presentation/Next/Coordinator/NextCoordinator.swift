@@ -9,8 +9,8 @@ import UIKit
 
 class NextCoordinator: Coordinator {
     var navigationController: UINavigationController?
-    
     var childCoordinators: [Coordinator] = []
+    weak var parentCoordinator: HomeCoordinator?
     
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
@@ -23,5 +23,7 @@ class NextCoordinator: Coordinator {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    
+    func didFinish() {
+        parentCoordinator?.didFinish(self)
+    }
 }

@@ -12,7 +12,7 @@ import RxCocoa
 class HomeViewController: UIViewController {
     //MARK: - properties
     let viewModel: HomeViewModel!
-    var coordinator: HomeCoordinator!
+    weak var coordinator: HomeCoordinator?
     
     var disposeBag = DisposeBag()
     
@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
         nextButton.rx.tap
             .subscribe { [weak self] _ in
                 guard let weakSelf = self else { return }
-                weakSelf.coordinator.moveToNext()
+                weakSelf.coordinator?.moveToNext()
             }
             .disposed(by: disposeBag)
             
@@ -47,6 +47,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
     
         view.backgroundColor = .systemGreen
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+//        coordinator?.didFinishHome()
     }
  
     

@@ -9,7 +9,7 @@ import UIKit
 
 class NextViewController: UIViewController {
     let viewModel: NextViewModel!
-    var coordinator: Coordinator?
+    weak var coordinator: NextCoordinator?
     
     init(viewModel: NextViewModel) {
         self.viewModel = viewModel
@@ -24,5 +24,11 @@ class NextViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemPink
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        coordinator?.didFinish()
     }
 }
